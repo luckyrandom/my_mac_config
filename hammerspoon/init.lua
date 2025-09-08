@@ -21,3 +21,24 @@ hs.hotkey.bind(hyper, "c", function() utils.focusOrNewAppWin("Google Chrome") en
 
 -- Show alert when config is loaded
 hs.alert.show("Config loaded")
+
+-- Show space name in menu bar
+-- Load space names from settings, or create a default set if none exist
+local spaceNames = hs.settings.get("spaceNames")
+if not spaceNames then
+    spaceNames = {
+        "1: Web",
+        "2: Term",
+        "3: Code",
+        "4: Chat",
+        "5: Notes",
+        "6: Slack",
+        "7: Mail",
+        "8: Music",
+        "9: System",
+        "10:Games"
+    }
+    hs.settings.set("spaceNames", spaceNames)
+end
+utils.showSpaceNameInMenuBar(spaceNames)
+
