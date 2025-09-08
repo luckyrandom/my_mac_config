@@ -2,10 +2,37 @@
 
 # Setup script for my_mac_config
 # Creates symbolic links from home directory to config files in this repo
+# Usage: ./setup.sh [--uninstall]
 
 set -e  # Exit on any error
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Check for uninstall flag
+if [ "$1" = "--uninstall" ]; then
+    echo "Uninstalling configuration files..."
+    echo ""
+    
+    # Remove Finicky symlink
+    if [ -L "$HOME/.finicky.js" ]; then
+        rm "$HOME/.finicky.js"
+        echo "✅ Removed ~/.finicky.js"
+    else
+        echo "ℹ️  ~/.finicky.js not found (already removed or not a symlink)"
+    fi
+    
+    # Remove Hammerspoon symlink
+    if [ -L "$HOME/.hammerspoon" ]; then
+        rm "$HOME/.hammerspoon"
+        echo "✅ Removed ~/.hammerspoon"
+    else
+        echo "ℹ️  ~/.hammerspoon not found (already removed or not a symlink)"
+    fi
+    
+    echo ""
+    echo "Uninstall complete!"
+    exit 0
+fi
 
 echo "Setting up configuration files from $REPO_DIR"
 echo ""
