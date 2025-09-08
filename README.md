@@ -53,3 +53,40 @@ The core idea is simple: when you want to open a URL in your current workspace, 
 - Google Chrome pinned to the Dock (required for creating new windows in current workspace)
 - **Accessibility permissions for Hammerspoon**: System Preferences → Security & Privacy → Privacy → Accessibility → Add Hammerspoon (required for Dock interaction)
 - **Automation permissions for Hammerspoon**: Allow Hammerspoon to control Chrome when prompted (required for opening URLs)
+
+## Standalone Setup (Chrome URL Handling Only)
+
+If you only want the Chrome URL handling feature without other configurations:
+
+### Prerequisites
+- [Hammerspoon](https://www.hammerspoon.org/) installed and running
+- [Finicky](https://github.com/johnste/finicky) installed as your default browser
+- Google Chrome pinned to the Dock
+- Accessibility permissions for Hammerspoon in System Preferences
+- Automation permissions for Hammerspoon (will be prompted)
+
+### Setup Steps
+1. **Download required files:**
+   - [`finicky.js`](finicky.js)
+   - [`hammerspoon/open_in_chrome.lua`](hammerspoon/open_in_chrome.lua)
+   - [`hammerspoon/win.lua`](hammerspoon/win.lua)
+
+2. **Install Finicky config:**
+   ```bash
+   cp finicky.js ~/.finicky.js
+   ```
+
+3. **Install Hammerspoon modules:**
+   ```bash
+   mkdir -p ~/.hammerspoon
+   cp open_in_chrome.lua ~/.hammerspoon/
+   cp win.lua ~/.hammerspoon/
+   ```
+
+4. **Add to your Hammerspoon init.lua:**
+   ```lua
+   local openInChrome = require('open_in_chrome')
+   openInChrome.enableUrlEventHandling()
+   ```
+
+5. **Reload Hammerspoon configuration**
