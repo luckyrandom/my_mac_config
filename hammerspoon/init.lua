@@ -3,6 +3,8 @@
 -- Load utility functions
 local utils = require('utils')
 
+local spaces = require('spaces')
+
 -- Define hyper key (cmd+ctrl+alt+shift)
 local hyper = {"cmd", "ctrl", "alt", "shift"}
 
@@ -40,5 +42,5 @@ if not spaceNames then
     }
     hs.settings.set("spaceNames", spaceNames)
 end
-utils.showSpaceNameInMenuBar(spaceNames)
+spaces.init(spaceNames)
 
