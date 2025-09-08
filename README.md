@@ -6,6 +6,31 @@
   - [Hammerspoon](https://www.hammerspoon.org/) :: A powerful tool for macOS automation that connects the operating system to a Lua scripting engine.
   - [Finicky](https://github.com/johnste/finicky) :: Route urls to the right app.
 
+# Setup Steps
+**You should alway proof read before install any script.**
+
+**Quick Setup:**
+```bash
+git clone https://github.com/luckyrandom/my_mac_config.git
+cd my_mac_config
+./setup.sh
+```
+
+The setup script will:
+- Check that Finicky and Hammerspoon are installed
+- Create symbolic links: `~/.finicky.js` → `finicky.js` and `~/.hammerspoon` → `hammerspoon/`
+- Provide next steps for completing the setup
+
+**Manual Setup:**
+1. **Configure Finicky**: Copy or soft link [`finicky.js`](finicky.js) to `~/.finicky.js`
+2. **Configure Hammerspoon**: Copy or soft link [`hammerspoon/`](hammerspoon/) to `~/.hammerspoon`
+
+**Uninstall:**
+```bash
+./setup.sh --uninstall
+```
+
+
 # Open URL in Chrome in the Current Workspace
 
 ## Problem It Solves
@@ -28,8 +53,3 @@ The core idea is simple: when you want to open a URL in your current workspace, 
 - Google Chrome pinned to the Dock (required for creating new windows in current workspace)
 - **Accessibility permissions for Hammerspoon**: System Preferences → Security & Privacy → Privacy → Accessibility → Add Hammerspoon (required for Dock interaction)
 - **Automation permissions for Hammerspoon**: Allow Hammerspoon to control Chrome when prompted (required for opening URLs)
-
-### Configuration Steps
-
-1. **Configure Finicky**: Copy [`finicky.js`](finicky.js) to `~/.finicky.js`
-2. **Configure Hammerspoon**: The configuration is already set up in [`hammerspoon/init.lua`](hammerspoon/init.lua) and [`hammerspoon/open_in_chrome.lua`](hammerspoon/open_in_chrome.lua)
