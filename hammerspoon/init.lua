@@ -20,6 +20,17 @@ hs.hotkey.bind(hyper, "w", utils.getWindowInfo)
 -- App launcher bindings
 hs.hotkey.bind(hyper, "t", function() utils.focusOrNewAppWin("iTerm", "New Window (Default Profile)") end)
 hs.hotkey.bind(hyper, "c", function() utils.focusOrNewAppWin("Google Chrome") end)
+hs.hotkey.bind(hyper, "o", function() utils.OpenInChromeCurrWorkspace("https://www.hammerspoon.org/docs/") end)
+
+-- URL handler for Finicky
+local logger = hs.logger.new('urlevent', 'info')
+hs.urlevent.bind("openInChrome", function(eventName, params)
+    logger.i("Received URL event: " .. eventName .. " with params: " .. hs.inspect(params))
+    if params and params.url then
+        logger.i("Opening URL in Chrome: " .. params.url)
+        utils.OpenInChromeCurrWorkspace(params.url)
+    end
+end)
 
 -- Show alert when config is loaded
 hs.alert.show("Config loaded")
