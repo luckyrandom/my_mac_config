@@ -69,21 +69,29 @@ function M.focusOrNewAppWin(appName, dockMenuItemName)
     if app then
         -- App is running, check for windows in current space
         local windows = app:allWindows()
-        local windowInCurrentSpace = nil
+        local visibleWindowInCurrentSpace = nil
+        local invisibleWindowInCurrentSpace = nil
         
         for _, win in pairs(windows) do
-            if win:isVisible() then
-                local winSpaces = hs.spaces.windowSpaces(win)
-                if winSpaces and hs.fnutils.contains(winSpaces, currentSpace) then
-                    windowInCurrentSpace = win
+            local winSpaces = hs.spaces.windowSpaces(win)
+            if winSpaces and hs.fnutils.contains(winSpaces, currentSpace) then
+                if win:isVisible() then
+                    visibleWindowInCurrentSpace = win
                     break
+                else
+                    invisibleWindowInCurrentSpace = win
                 end
             end
         end
         
-        if windowInCurrentSpace then
-            -- Focus existing window in current space
-            windowInCurrentSpace:focus()
+        if visibleWindowInCurrentSpace then
+            -- Focus existing visible window in current space
+            visibleWindowInCurrentSpace:focus()
+            return
+        elseif invisibleWindowInCurrentSpace then
+            -- Make invisible window visible and focus it
+            invisibleWindowInCurrentSpace:becomeMain()
+            invisibleWindowInCurrentSpace:focus()
             return
         else
             -- App running but no window in current space, create new window via Dock
