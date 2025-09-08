@@ -2,6 +2,7 @@
 
 -- Load utility functions
 local utils = require('utils')
+local win = require('win')
 local openInChrome = require('open_in_chrome')
 local spaces = require('spaces')
 
@@ -21,8 +22,8 @@ hs.hotkey.bind(hyper, "r", reloadConfig)
 hs.hotkey.bind(hyper, "w", utils.getWindowInfo)
 
 -- App launcher bindings
-hs.hotkey.bind(hyper, "t", function() utils.focusOrNewAppWin("iTerm", "New Window (Default Profile)") end)
-hs.hotkey.bind(hyper, "c", function() utils.focusOrNewAppWin("Google Chrome") end)
+hs.hotkey.bind(hyper, "t", function() win.focusOrNewAppWin("iTerm", "New Window (Default Profile)") end)
+hs.hotkey.bind(hyper, "c", function() win.focusOrNewAppWin("Google Chrome") end)
 hs.hotkey.bind(hyper, "o", function() openInChrome.OpenInChromeCurrWorkspace("https://www.hammerspoon.org/docs/") end)
 
 

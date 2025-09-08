@@ -1,6 +1,6 @@
 local M = {}
 
-local utils = require('utils')
+local win = require('win')
 
 -- Enable URL event handling for Finicky integration
 -- Sets up hs.urlevent.bind to handle "openInChrome" events
@@ -53,7 +53,7 @@ function M.OpenInChromeCurrWorkspace(url)
     watcher:start()
     local logger = hs.logger.new('urlevent', 'info')
     logger.i("Focusing or launching " .. appName .. " to open URL: " .. url)
-    utils.focusOrNewAppWin(appName)
+    win.focusOrNewAppWin(appName)
 
     -- Add a timeout to stop the watcher if Chrome doesn't activate within 10 seconds
     hs.timer.doAfter(10, function()
