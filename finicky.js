@@ -11,6 +11,19 @@
 export default {
   defaultBrowser: "Google Chrome",
 
+  handlers: [
+    {
+      // If the link is opened by Hammerspoon, send it directly to Google Chrome.
+      match: ({ options }) => options?.opener?.name === "Hammerspoon",
+      browser: "Google Chrome",
+    },
+    {
+      // For any other app, send to Hammerspoon via custom protocol
+      match: ({ options }) => options?.opener?.name !== "Hammerspoon",
+      browser: "Hammerspoon",
+    },
+  ],
+
   rewrite: [
     {
       // Rewrite URLs to hammerspoon protocol when not from Hammerspoon
